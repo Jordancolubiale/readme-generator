@@ -1,40 +1,67 @@
 // TODO: Include packages needed for this application
 
 // TODO: Create an array of questions for user input
-const questions = [ {
+const questions = [{
     type: 'text',
-    message: 'What is your name?',
-    name: 'name',
-  },
-  {
+    message: 'Github username?',
+    name: 'github',
+},
+{
     type: 'text',
-    message: 'Where are you from?',
-    name: 'location',
-  },
-  {
+    message: 'Email used for github?',
+    name: 'email',
+},
+
+{
     type: 'text',
-    message: 'What is your bio?',
-    name: 'bio',
-  },
-  {
+    message: 'Project Name?',
+    name: 'title',
+},
+{
     type: 'text',
-    message: 'What is your LinkedIn URL',
-    name: 'linkedIn',
-  },
-  {
+    message: 'Short Project Description.',
+    name: 'description',
+},
+{
+    type: 'list',
+    name: 'license',
+    message: 'What kind of license should your project have?',
+    choices: ['MIT', 'GNU'],
+    default: ["MIT"],
+    validate: nameInput => {
+        if (nameInput) {
+            return true;
+        } else {
+            console.log('Please choose a license!');
+            return false;
+        }
+    }
+},
+
+{
     type: 'text',
     message: 'What is your Github URL',
     name: 'gitHub',
-  },
+},
 ];
 
 // TODO: Create a function to write README file
-function writeToFile(README, README, function(err)) { 
-    err? console.log(err) : console.log("Go check that README out!")
-}
-
+const writeFile = data => {
+    fs.writeFile('README.md', data, err => {
+        if (err) {
+            console.log(err);
+            return;
+        } else {
+            console.log("Your README has been successfully created!")
+        }
+    })
+};
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+    inquirer
+        .prompt(questions)
+    .then((answers) => {
+    }
 
 // Function call to initialize app
 init();
