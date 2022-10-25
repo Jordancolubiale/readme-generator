@@ -23,6 +23,22 @@ const questions = [{
     name: 'description',
 },
 {
+    type: 'input',
+    message: 'What should be done to run tests?',
+    name: 'test',
+},
+{
+    type: 'input',
+    message: 'What does the user need to know about using the repo?',
+    name: 'usage',
+},
+{
+    type: 'input',
+    message: 'Who else helped contribute to the project?',
+    name: 'contributions',
+},
+
+{
     type: 'list',
     name: 'license',
     message: 'What kind of license should your project have?',
@@ -46,22 +62,17 @@ const questions = [{
 ];
 
 // TODO: Create a function to write README file
-const writeFile = data => {
-    fs.writeFile('README.md', data, err => {
-        if (err) {
-            console.log(err);
-            return;
-        } else {
-            console.log("Your README has been successfully created!")
-        }
-    })
+function writeToFile(data) {
+    fs.writeFile('README.md', data, (err) =>
+        err ? console.error(err) : console.log('Time to check out that awesome readme!')
+    )
 };
-// TODO: Create a function to initialize app
+
+// init function in order to initialize inquirer
 function init() {
     inquirer
         .prompt(questions)
-    .then((answers) => {
-    }
-
+        .then((responses) => writeToFile(generateMarkdown(responses)));
+};
 // Function call to initialize app
 init();
