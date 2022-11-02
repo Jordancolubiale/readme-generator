@@ -14,7 +14,16 @@ const questions = [{
     message: 'Email used for github?',
     name: 'email',
 },
-
+{
+    type: 'text',
+    message: 'List steps to install',
+    name: 'install',
+},
+{
+    type: 'text',
+    message: 'List any third party assets used',
+    name: 'thirdParty',
+},
 {
     type: 'text',
     message: 'Project Name?',
@@ -24,6 +33,11 @@ const questions = [{
     type: 'text',
     message: 'Short Project Description.',
     name: 'description',
+},
+{
+    type: 'text',
+    message: 'List your fellow Collaborators',
+    name: 'team',
 },
 {
     type: 'input',
@@ -45,7 +59,7 @@ const questions = [{
     type: 'list',
     name: 'license',
     message: 'What kind of license should your project have?',
-    choices: ['MIT', 'GNU'],
+    choices: ['MIT', 'GNU', ],
     default: ["MIT"],
     validate: nameInput => {
         if (nameInput) {
@@ -66,7 +80,7 @@ const questions = [{
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-    return fs.writeFile(path.join(process.cwd(), fileName), data);
+    return fs.writeFileSync(path.join(process.cwd(), fileName), data);
 }
 
 // init function in order to initialize inquirer
